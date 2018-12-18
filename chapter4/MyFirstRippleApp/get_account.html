@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<title> Get Account </title>
+<head>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Get Account</a>
+</nav>
+
+<br/><br/><br/>
+
+<center>
+  <p class="lead">Ripple Address : r41sFTd4rftxY1VCn5ZDDipb4KaV5VLFy2 </p>
+  <p id="balance"> Please wait, fetching account details...</p>
+</center>
+
+</body>
+
+<script src="js/lodash.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/ripple.min.js"></script>
+
+  <script>
+
+    var api = new ripple.RippleAPI({server:'wss://s.altnet.rippletest.net:51233'});
+
+    $('document').ready(function(){
+      updateAccountDetails();
+    });
+
+    function updateAccountDetails(){
+
+      api.connect().then(() => {
+        const accountAddress = 'r41sFTd4rftxY1VCn5ZDDipb4KaV5VLFy2';
+        return api.getAccountInfo(accountAddress);
+      }).then(info => {
+        $('#balance').text("Account Balance : " + info.xrpBalance+ " XRP");
+      }).then(() => {
+        return api.disconnect();
+      }).catch(console.error);
+    }
+
+  </script>
+</html>

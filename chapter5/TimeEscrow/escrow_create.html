@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<title> Time Escrow </title>
+<head>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Time Escrow</a>
+</nav>
+
+<br/><br/><br/>
+
+<center>
+  <p class="lead">Ripple Address : <span id="rippleAddress"> </span> </p>
+  <p id="balance"> Please wait, fetching account details...</p>
+  <button id="showCreateEscrowButton" class="btn btn-primary">Create Time-Held Escrow</button>
+    <button id="showReleaseEscrowButton" class="btn btn-primary">Release Escrow</button>
+
+  <button id="logoutButton" class="btn btn-primary">Logout</button>
+  <br/>
+  <br/>
+  <br/>
+  <div id="escrowOutput"> </div>
+  <div id="alert" style="width:30%"></div>
+</center>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+        <div class="form-group">
+          <label for="inputRippleAddress">Ripple Address</label>
+          <input type="text" class="form-control" id="inputRippleAddress" aria-describedby="rippleAddressHelp" placeholder="Enter Ripple Address">
+        </div>
+        <div class="form-group">
+          <label for="inputSecret">Secret</label>
+          <input type="password" class="form-control" id="inputSecret" placeholder="Secret">
+        </div>
+
+        <button id="loginButton" class="btn btn-primary">Login</button>
+      </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createEscrowModal" tabindex="-1" role="dialog" aria-labelledby="createEscrowModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createEscrowModalLabel">Create Escrow </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+        <div class="form-group">
+          <label for="inputDestinationAddress">Destination</label>
+          <input type="text" class="form-control" id="inputDestinationAddress" aria-describedby="inputDestinationAddressHelp" placeholder="Destination Address">
+        </div>
+        <div class="form-group">
+          <label for="inputAmount">Amount</label>
+          <input type="number" class="form-control" id="inputAmount" placeholder="Amount">
+        </div>
+        <div class="form-group">
+          <label for="inputDate">Release Date (UTC)</label>
+          <input type="date" class="form-control" id="inputDate" placeholder="Date">
+        </div>
+          <div class="form-group">
+            <label for="inputTime">Release Time (UTC)</label>
+            <input type="time" class="form-control" id="inputTime" placeholder="Time">
+          </div>
+
+        <button id="createEscrowButton" class="btn btn-primary">Create Escrow</button>
+        <br/>  <br/>
+        <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="releaseEscrowModal" tabindex="-1" role="dialog" aria-labelledby="releaseEscrowModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="releaseEscrowModalLabel">Release Escrow </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+        <div class="form-group">
+          <label for="inputOwnerAddress">Owner</label>
+          <input type="text" class="form-control" id="inputOwnerAddress" aria-describedby="inputOwnerAddressHelp" placeholder="Owner Address">
+        </div>
+        <div class="form-group">
+          <label for="inputSequence">Sequence</label>
+          <input type="number" class="form-control" id="inputSequence" placeholder="Sequence">
+        </div>
+
+        <button id="releaseEscrowButton" class="btn btn-primary">Release Escrow</button>
+        <br/>  <br/>
+        <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bundle.js"></script>
+</html>
